@@ -1,13 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Petal Route | Same-day flowers</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>پتال روت | گل</title>
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; background: #fff; color: #222; font-family: Poppins, sans-serif; }
+    body { margin: 0; background: #fff; color: #222; font-family: Tahoma, "Segoe UI", sans-serif; }
     button, input, select { font-family: inherit; }
     .bar { background: #7a1f3d; color: #fff; text-align: center; padding: 8px; font-size: 13px; }
     header { display: flex; align-items: center; gap: 16px; padding: 14px 22px; border-bottom: 1px solid #f0d5de; }
@@ -20,7 +19,7 @@
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0 22px 40px; }
     article { border: 1px solid #f3e3e8; border-radius: 8px; overflow: hidden; position: relative; }
     article img { width: 100%; height: 220px; object-fit: cover; }
-    .tag { position: absolute; top: 10px; left: 10px; background: #e23b3b; color: #fff; font-size: 11px; padding: 3px 6px; border-radius: 4px; }
+    .tag { position: absolute; top: 10px; inset-inline-start: 10px; background: #e23b3b; color: #fff; font-size: 11px; padding: 3px 6px; border-radius: 4px; }
     .body { padding: 10px 12px 14px; }
     h3 { margin: 0 0 6px; font-size: 16px; }
     .old { color: #999; text-decoration: line-through; margin-right: 6px; }
@@ -30,48 +29,51 @@
     .buy { width: 100%; background: #7a1f3d; color: #fff; border: 0; border-radius: 6px; padding: 9px; cursor: pointer; }
     .sheet { max-width: 760px; margin: 20px auto 40px; padding: 0 16px; }
     .row { display: flex; justify-content: space-between; border-bottom: 1px solid #f3e3e8; padding: 12px 0; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } nav { display: none; } }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } nav button:not(#loginBtn):not(#cartBtn) { display: none; } }
+    #intro { position: fixed; inset: 0; z-index: 20; background: #fff7f8; display: grid; place-items: center; transition: opacity .6s ease; }
+    #intro.hide { opacity: 0; pointer-events: none; }
+    #intro img { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; animation: bloom 1s ease; }
+    #intro b { display: block; text-align: center; color: #7a1f3d; margin-top: 10px; font-weight: 700; }
+    @keyframes bloom { from { transform: scale(.7); opacity: 0; } to { transform: none; opacity: 1; } }
   </style>
 </head>
 <body>
-  <div class="bar">Same-day flower delivery · order before 9 pm</div>
+  <div id="intro"><div><img src="img/petal-logo.jpg" alt=""><b>پتال روت</b></div></div>
+  <div class="bar">ارسال گل در همان روز · سفارش تا ساعت ۹ شب</div>
   <header>
-    <div class="logo">Petal Route</div>
+    <div class="logo">پتال روت</div>
     <nav>
-      <button data-go="shop">Flowers</button>
-      <button data-go="shop">Bouquets</button>
-      <button data-go="shop">Occasion</button>
-      <button data-go="orders">Track order</button>
-      <button id="loginBtn">Login</button>
-      <button id="cartBtn">Cart (<span id="count">0</span>)</button>
+      <button data-go="shop">گل‌ها</button>
+      <button data-go="shop">دسته‌گل</button>
+      <button data-go="shop">مناسبت</button>
+      <button data-go="orders">پیگیری</button>
+      <button id="loginBtn">ورود</button>
+      <button id="cartBtn">سبد (<span id="count">0</span>)</button>
     </nav>
   </header>
   <main id="app"></main>
   <script>
     const products = [
-      ["f1","Softly gathered",245,159,"https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80",true],
-      ["f2","Red rose hand-tie",189,189,"https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=800&q=80",false],
-      ["f3","Pink tulip wrap",299,299,"https://images.unsplash.com/photo-1455659817273-f96807779a8a?auto=format&fit=crop&w=800&q=80",false],
-      ["f4","White lily vase",139,139,"https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=800&q=80",false],
-      ["f5","Mixed rose box",229,179,"https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=800&q=80",true],
-      ["f6","Orchid pot",169,169,"https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=700&q=80",false],
-      ["f7","Dried meadow",99,79,"https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=800&q=80",true],
-      ["f8","Table posy",129,129,"https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=700&q=80",false]
+      ["f1","دسته رز قرمز",2450000,1590000,"img/flower-roses.jpg",true],
+      ["f2","لاله‌های صورتی",1890000,1890000,"img/flower-tulips.jpg",false],
+      ["f3","سوسن سفید در گلدان",1390000,1390000,"img/flower-lilies.jpg",false],
+      ["f4","باکس گل مخلوط",2290000,1790000,"img/flower-box.jpg",true]
     ].map(([id,name,was,now,img,hot])=>({id,name,was,now,img,hot}));
     const key="petal-v3";
     const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(key+k))??d}catch{return d}};
     const write=(k,v)=>localStorage.setItem(key+k,JSON.stringify(v));
     let cart=read("c",[]), user=read("u",null), orders=read("o",[]), view="home";
-    const aed=n=>"AED "+n.toFixed(2);
+    const aed=n=>new Intl.NumberFormat("fa-IR").format(n)+" تومان";
+    setTimeout(()=>document.getElementById("intro").classList.add("hide"), 1700);
     const find=id=>products.find(p=>p.id===id);
     const app=document.getElementById("app");
     const go=v=>{view=v;draw()};
     document.getElementById("cartBtn").onclick=()=>go("cart");
     document.getElementById("loginBtn").onclick=()=>go(user?"account":"login");
-    function card(p){return `<article>${p.hot?'<span class="tag">Offer</span>':""}<img src="${p.img}" alt=""><div class="body"><h3>${p.name}</h3><p>${p.was!==p.now?`<span class="old">${aed(p.was)}</span>`:""}<span class="price">${aed(p.now)}</span></p><p class="when">Earliest delivery: today</p><select id="s-${p.id}"><option>Hand-tied</option><option>In a vase</option><option>Flower box</option></select><button class="buy" data-add="${p.id}">Buy now</button></div></article>`}
+    function card(p){return `<article>${p.hot?'<span class="tag">پیشنهاد</span>':""}<img src="${p.img}" alt="${p.name}"><div class="body"><h3>${p.name}</h3><p>${p.was!==p.now?`<span class="old">${aed(p.was)}</span>`:""}<span class="price">${aed(p.now)}</span></p><p class="when">زودترین ارسال: امروز</p><select id="s-${p.id}"><option>دسته‌ای</option><option>در گلدان</option><option>باکس گل</option></select><button class="buy" data-add="${p.id}">خرید</button></div></article>`}
     function draw(){
       document.getElementById("count").textContent=cart.reduce((s,i)=>s+i.qty,0);
-      document.getElementById("loginBtn").textContent=user?user.name:"Login";
+      document.getElementById("loginBtn").textContent=user?user.name:"ورود";
       const pages={home,shop,cart:cartView,checkout,orders:ordersView,login,account};
       app.innerHTML=pages[view]();
       document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
@@ -89,13 +91,13 @@
       const out=document.getElementById("out");
       if(out)out.onclick=()=>{user=null;write("u",null);go("home")};
     }
-    function home(){return `<div class="filters"><button>All flowers</button><button>Roses</button><button>Under AED 200</button><button>Luxury</button></div><h1>Fresh flowers, arranged today</h1><div class="grid">${products.map(card).join("")}</div>`}
+    function home(){return `<div class="filters"><button>همه گل‌ها</button><button>رز</button><button>زیر دو میلیون</button><button>لوکس</button></div><h1>گل‌های تازه، چیدهٔ امروز</h1><div class="grid">${products.map(card).join("")}</div>`}
     function shop(){return home()}
-    function cartView(){if(!cart.length)return `<div class="sheet"><h2>Cart is empty</h2><button class="buy" data-go="shop">Browse flowers</button></div>`; const total=cart.reduce((s,i)=>s+find(i.id).now*i.qty,0); return `<div class="sheet"><h2>Cart</h2>${cart.map((i,idx)=>`<div class="row"><div>${find(i.id).name}<br>${i.size} × ${i.qty}</div><div>${aed(find(i.id).now*i.qty)}<br><button data-del="${idx}">Remove</button></div></div>`).join("")}<p class="price">${aed(total)}</p><button class="buy" data-go="checkout">Checkout</button></div>`}
-    function checkout(){if(!user)return `<div class="sheet"><h2>Login to order</h2><button class="buy" data-go="login">Login</button></div>`; return `<div class="sheet"><h2>Demo checkout</h2><input value="4242 4242 4242 4242"><p>No real payment is taken.</p><button class="buy" id="pay">Place order</button></div>`}
-    function ordersView(){if(!orders.length)return `<div class="sheet"><h2>No orders to track</h2></div>`; return `<div class="sheet"><h2>Your orders</h2>${orders.map(o=>`<div class="row"><span>${o.items.join(", ")}</span><b>${aed(o.total)}</b></div>`).join("")}</div>`}
-    function login(){return `<div class="sheet"><h2>Login</h2><input id="nm" placeholder="Name"><button class="buy" id="enter">Continue</button></div>`}
-    function account(){return `<div class="sheet"><h2>${user.name}</h2><button class="buy" id="out">Log out</button></div>`}
+    function cartView(){if(!cart.length)return `<div class="sheet"><h2>سبد خالی است</h2><button class="buy" data-go="shop">دیدن گل‌ها</button></div>`; const total=cart.reduce((s,i)=>s+find(i.id).now*i.qty,0); return `<div class="sheet"><h2>سبد</h2>${cart.map((i,idx)=>`<div class="row"><div>${find(i.id).name}<br>${i.size} × ${i.qty}</div><div>${aed(find(i.id).now*i.qty)}<br><button data-del="${idx}">حذف</button></div></div>`).join("")}<p class="price">${aed(total)}</p><button class="buy" data-go="checkout">پرداخت</button></div>`}
+    function checkout(){if(!user)return `<div class="sheet"><h2>برای سفارش وارد شوید</h2><button class="buy" data-go="login">ورود</button></div>`; return `<div class="sheet"><h2>پرداخت آزمایشی</h2><input value="6037 0000 0000 4412"><p>پرداخت واقعی انجام نمی‌شود.</p><button class="buy" id="pay">ثبت سفارش</button></div>`}
+    function ordersView(){if(!orders.length)return `<div class="sheet"><h2>سفارشی برای پیگیری نیست</h2></div>`; return `<div class="sheet"><h2>سفارش‌ها</h2>${orders.map(o=>`<div class="row"><span>${o.items.join("، ")}</span><b>${aed(o.total)}</b></div>`).join("")}</div>`}
+    function login(){return `<div class="sheet"><h2>ورود</h2><input id="nm" placeholder="نام"><button class="buy" id="enter">ادامه</button></div>`}
+    function account(){return `<div class="sheet"><h2>${user.name}</h2><button class="buy" id="out">خروج</button></div>`}
     document.querySelectorAll("header [data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
     draw();
   </script>
