@@ -1,123 +1,102 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>فلورا | گل</title>
-  <meta name="description" content="گل و گلدان فلورا با قیمت نمونه، سبد خرید و پرداخت آزمایشی." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,680&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Petal Route | Same-day flowers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; background: #f3ecdf; color: #24362c; font-family: Nunito, sans-serif; }
+    body { margin: 0; background: #fff; color: #222; font-family: Poppins, sans-serif; }
     button, input, select { font-family: inherit; }
-    header {
-      margin: 18px auto 0; width: min(1100px, calc(100% - 28px));
-      background: #fffaf3; border-radius: 999px; padding: 12px 18px;
-      display: flex; align-items: center; gap: 14px;
-      box-shadow: 0 10px 30px rgba(60, 40, 20, 0.06);
-    }
-    .logo { font-family: Fraunces, serif; font-size: 1.6rem; text-decoration: none; color: #24362c; }
-    nav { display: flex; gap: 8px; margin-inline-start: auto; }
-    nav button, .pill { border: 0; background: #e7f2ea; color: #1d4d38; border-radius: 999px; padding: 8px 12px; cursor: pointer; }
-    main { width: min(1100px, calc(100% - 28px)); margin: 22px auto 50px; }
-    .bloom { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: center; background: #fffaf3; border-radius: 40px; padding: 22px; }
-    .bloom img { width: 100%; height: 520px; object-fit: cover; border-radius: 180px 40px 160px 40px; }
-    h1, h2 { font-family: Fraunces, serif; font-weight: 560; }
-    h1 { font-size: clamp(2.6rem, 5vw, 4.4rem); line-height: 1.05; margin: 8px 0; }
-    .soft { line-height: 1.9; color: #5c6b62; }
-    .go { background: #2f6b4f; color: white; border: 0; border-radius: 999px; padding: 12px 18px; cursor: pointer; }
-    .mosaic { margin-top: 26px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
-    .tile { background: #fffaf3; border-radius: 32px; overflow: hidden; }
-    .tile img { width: 100%; height: 280px; object-fit: cover; border-radius: 32px 32px 0 0; }
-    .tile:nth-child(3n) img { height: 220px; }
-    .tile div { padding: 14px 16px 18px; }
-    .price { color: #2f6b4f; font-weight: 700; }
-    select, input { width: 100%; border: 0; background: #f3ecdf; border-radius: 12px; padding: 10px; margin: 8px 0; }
-    .note { max-width: 640px; background: #fffaf3; border-radius: 32px; padding: 28px; }
-    .row { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eadfce; }
-    footer { text-align: center; color: #7d8b82; padding-bottom: 28px; }
-    @media (max-width: 800px) {
-      nav { display: none; }
-      .bloom, .mosaic { grid-template-columns: 1fr; }
-      .bloom img { height: 320px; }
-    }
+    .bar { background: #7a1f3d; color: #fff; text-align: center; padding: 8px; font-size: 13px; }
+    header { display: flex; align-items: center; gap: 16px; padding: 14px 22px; border-bottom: 1px solid #f0d5de; }
+    .logo { color: #7a1f3d; font-weight: 700; font-size: 22px; }
+    nav { display: flex; gap: 14px; margin-inline-start: auto; flex-wrap: wrap; }
+    nav button, .ghost { background: none; border: 0; cursor: pointer; color: #7a1f3d; font-weight: 600; }
+    .filters { display: flex; gap: 8px; padding: 16px 22px; }
+    .filters button { border: 1px solid #7a1f3d; background: #fff; color: #7a1f3d; border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+    h1 { margin: 8px 22px 18px; font-size: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0 22px 40px; }
+    article { border: 1px solid #f3e3e8; border-radius: 8px; overflow: hidden; position: relative; }
+    article img { width: 100%; height: 220px; object-fit: cover; }
+    .tag { position: absolute; top: 10px; left: 10px; background: #e23b3b; color: #fff; font-size: 11px; padding: 3px 6px; border-radius: 4px; }
+    .body { padding: 10px 12px 14px; }
+    h3 { margin: 0 0 6px; font-size: 16px; }
+    .old { color: #999; text-decoration: line-through; margin-right: 6px; }
+    .price { color: #7a1f3d; font-weight: 700; }
+    .when { color: #2e7d32; font-size: 12px; }
+    select { width: 100%; margin: 8px 0; }
+    .buy { width: 100%; background: #7a1f3d; color: #fff; border: 0; border-radius: 6px; padding: 9px; cursor: pointer; }
+    .sheet { max-width: 760px; margin: 20px auto 40px; padding: 0 16px; }
+    .row { display: flex; justify-content: space-between; border-bottom: 1px solid #f3e3e8; padding: 12px 0; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } nav { display: none; } }
   </style>
 </head>
 <body>
+  <div class="bar">Same-day flower delivery · order before 9 pm</div>
   <header>
-    <a class="logo" href="#home">flora</a>
+    <div class="logo">Petal Route</div>
     <nav>
-      <button data-go="home">خانه</button>
-      <button data-go="shop">گل‌ها</button>
-      <button data-go="orders">سفارش‌ها</button>
-      <button data-go="contact">تماس</button>
-      <button data-go="terms">قوانین</button>
+      <button data-go="shop">Flowers</button>
+      <button data-go="shop">Bouquets</button>
+      <button data-go="shop">Occasion</button>
+      <button data-go="orders">Track order</button>
+      <button id="loginBtn">Login</button>
+      <button id="cartBtn">Cart (<span id="count">0</span>)</button>
     </nav>
-    <button class="pill" id="loginBtn">ورود</button>
-    <button class="pill" id="cartBtn">سبد <span id="count">0</span></button>
   </header>
   <main id="app"></main>
-  <footer>فلورا · قیمت‌ها نمونه هستند</footer>
   <script>
     const products = [
-      ["bride","دسته عروس","رز و سبزی، بسته متوسط.",6500000,"https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1200&q=80"],
-      ["box","باکس فصل","ترکیب گل‌های همین هفته.",1800000,"https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=1200&q=80"],
-      ["orchid","ارکیده","دو شاخه در گلدان سرامیک.",4200000,"https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=1200&q=80"],
-      ["dried","دسته خشک","ماندگار و کم‌دردسر.",980000,"https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=1200&q=80"],
-      ["week","اشتراک هفته","هر هفته یک باکس تازه.",2500000,"https://images.unsplash.com/photo-1455659817273-f96807779a8a?auto=format&fit=crop&w=1200&q=80"],
-      ["table","گلدان میز","ارتفاع کوتاه برای میز.",1400000,"https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=80"]
-    ].map(([id,name,text,price,img]) => ({id,name,text,price,img}));
-    const key = "flora-v2";
-    const read = (k,d) => { try { return JSON.parse(localStorage.getItem(key+k)) ?? d; } catch { return d; } };
-    const write = (k,v) => localStorage.setItem(key+k, JSON.stringify(v));
-    let cart = read("cart", []), user = read("user", null), orders = read("orders", []), view = "home";
-    const money = (n) => new Intl.NumberFormat("fa-IR").format(n) + " تومان";
-    const find = (id) => products.find((p) => p.id === id);
-    const app = document.getElementById("app");
-    const go = (v) => { view = v; draw(); };
-    document.getElementById("cartBtn").onclick = () => go("cart");
-    document.getElementById("loginBtn").onclick = () => go(user ? "account" : "login");
-    function tile(p){return `<article class="tile"><img src="${p.img}" alt="${p.name}"><div><h2>${p.name}</h2><p class="soft">${p.text}</p><p class="price">${money(p.price)}</p><select id="s-${p.id}"><option>کوچک</option><option selected>متوسط</option><option>بزرگ</option></select><button class="go" data-add="${p.id}">می‌خواهم</button></div></article>`}
+      ["f1","Softly gathered",245,159,"https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80",true],
+      ["f2","Red rose hand-tie",189,189,"https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=800&q=80",false],
+      ["f3","Pink tulip wrap",299,299,"https://images.unsplash.com/photo-1455659817273-f96807779a8a?auto=format&fit=crop&w=800&q=80",false],
+      ["f4","White lily vase",139,139,"https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=800&q=80",false],
+      ["f5","Mixed rose box",229,179,"https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=800&q=80",true],
+      ["f6","Orchid pot",169,169,"https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=700&q=80",false],
+      ["f7","Dried meadow",99,79,"https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=800&q=80",true],
+      ["f8","Table posy",129,129,"https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=700&q=80",false]
+    ].map(([id,name,was,now,img,hot])=>({id,name,was,now,img,hot}));
+    const key="petal-v3";
+    const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(key+k))??d}catch{return d}};
+    const write=(k,v)=>localStorage.setItem(key+k,JSON.stringify(v));
+    let cart=read("c",[]), user=read("u",null), orders=read("o",[]), view="home";
+    const aed=n=>"AED "+n.toFixed(2);
+    const find=id=>products.find(p=>p.id===id);
+    const app=document.getElementById("app");
+    const go=v=>{view=v;draw()};
+    document.getElementById("cartBtn").onclick=()=>go("cart");
+    document.getElementById("loginBtn").onclick=()=>go(user?"account":"login");
+    function card(p){return `<article>${p.hot?'<span class="tag">Offer</span>':""}<img src="${p.img}" alt=""><div class="body"><h3>${p.name}</h3><p>${p.was!==p.now?`<span class="old">${aed(p.was)}</span>`:""}<span class="price">${aed(p.now)}</span></p><p class="when">Earliest delivery: today</p><select id="s-${p.id}"><option>Hand-tied</option><option>In a vase</option><option>Flower box</option></select><button class="buy" data-add="${p.id}">Buy now</button></div></article>`}
     function draw(){
-      document.getElementById("count").textContent = cart.reduce((s,i)=>s+i.qty,0);
-      document.getElementById("loginBtn").textContent = user ? user.name : "ورود";
-      const pages = {home, shop, cart: cartView, checkout, orders: ordersView, contact, terms, login, account};
-      app.innerHTML = pages[view]();
-      document.querySelectorAll("[data-go]").forEach((b)=>b.onclick=()=>go(b.dataset.go));
-      document.querySelectorAll("[data-add]").forEach((b)=>b.onclick=()=>{
-        const size = document.getElementById("s-"+b.dataset.add).value;
-        const hit = cart.find((x)=>x.id===b.dataset.add && x.size===size);
-        if (hit) hit.qty++; else cart.push({id:b.dataset.add,size,qty:1});
-        write("cart", cart); draw();
+      document.getElementById("count").textContent=cart.reduce((s,i)=>s+i.qty,0);
+      document.getElementById("loginBtn").textContent=user?user.name:"Login";
+      const pages={home,shop,cart:cartView,checkout,orders:ordersView,login,account};
+      app.innerHTML=pages[view]();
+      document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+      document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{
+        const size=document.getElementById("s-"+b.dataset.add).value;
+        const hit=cart.find(x=>x.id===b.dataset.add&&x.size===size);
+        if(hit)hit.qty++; else cart.push({id:b.dataset.add,size,qty:1});
+        write("c",cart); draw();
       });
-      document.querySelectorAll("[data-del]").forEach((b)=>b.onclick=()=>{ cart.splice(+b.dataset.del,1); write("cart",cart); draw(); });
-      const pay = document.getElementById("pay");
-      if (pay) pay.onclick = () => {
-        orders.unshift({items: cart.map((i)=>({name:find(i.id).name,size:i.size,qty:i.qty})), total: cart.reduce((s,i)=>s+find(i.id).price*i.qty,0)});
-        write("orders", orders); cart=[]; write("cart", cart); go("orders");
-      };
-      const enter = document.getElementById("enter");
-      if (enter) enter.onclick = () => {
-        const name = document.getElementById("nm").value.trim();
-        const phone = document.getElementById("ph").value.trim();
-        if (!name || !phone) return;
-        user = {name, phone}; write("user", user); go("shop");
-      };
-      const out = document.getElementById("out");
-      if (out) out.onclick = () => { user=null; write("user", null); go("home"); };
+      document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.del,1);write("c",cart);draw()});
+      const pay=document.getElementById("pay");
+      if(pay)pay.onclick=()=>{orders.unshift({items:cart.map(i=>find(i.id).name), total:cart.reduce((s,i)=>s+find(i.id).now*i.qty,0)});write("o",orders);cart=[];write("c",cart);go("orders")};
+      const enter=document.getElementById("enter");
+      if(enter)enter.onclick=()=>{const name=document.getElementById("nm").value.trim(); if(!name)return; user={name}; write("u",user); go("shop")};
+      const out=document.getElementById("out");
+      if(out)out.onclick=()=>{user=null;write("u",null);go("home")};
     }
-    function home(){return `<section class="bloom"><img src="https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=1400&q=80" alt=""><div><p class="soft">استودیو گل</p><h1>برای همین هفته چیده شده</h1><p class="soft">دسته، گلدان و اشتراک. اندازه را انتخاب کنید و سفارش را ثبت کنید.</p><button class="go" data-go="shop">دیدن گل‌ها</button></div></section><section class="mosaic">${products.slice(0,4).map(tile).join("")}</section>`}
-    function shop(){return `<section class="mosaic">${products.map(tile).join("")}</section>`}
-    function cartView(){ if(!cart.length) return `<section class="note"><h2>سبد خالی است</h2><button class="go" data-go="shop">گل‌ها</button></section>`; const total=cart.reduce((s,i)=>s+find(i.id).price*i.qty,0); return `<section class="note"><h2>سبد</h2>${cart.map((i,idx)=>`<div class="row"><div>${find(i.id).name}<br>${i.size} · ${i.qty}</div><div>${money(find(i.id).price*i.qty)}<br><button data-del="${idx}">حذف</button></div></div>`).join("")}<p class="price">جمع ${money(total)}</p><button class="go" data-go="checkout">پرداخت</button></section>`}
-    function checkout(){ if(!user) return `<section class="note"><h2>اول وارد شوید</h2><button class="go" data-go="login">ورود</button></section>`; return `<section class="note"><h2>پرداخت آزمایشی</h2><p>${user.name}</p><input value="6037 0000 0000 4412"><p class="soft">به بانک وصل نیست.</p><button class="go" id="pay">ثبت سفارش</button></section>`}
-    function ordersView(){ if(!orders.length) return `<section class="note"><h2>هنوز سفارشی نیست</h2></section>`; return `<section class="note"><h2>سفارش‌ها</h2>${orders.map((o)=>`<div class="row"><span>${o.items.map(i=>i.name).join("، ")}</span><span>${money(o.total)}</span></div>`).join("")}</section>`}
-    function contact(){ return `<section class="note"><h2>تماس</h2><p>تلفن ۰۲۱۹۱۰۰۴۴۱۲</p><p class="soft">هر روز ۱۲ تا ۲۱.</p></section>`}
-    function terms(){ return `<section class="note"><h2>قوانین</h2><p class="soft">قیمت‌ها نمایشی هستند و سفارش فقط در مرورگر شما ذخیره می‌شود.</p></section>`}
-    function login(){ return `<section class="note"><h2>ورود</h2><input id="nm" placeholder="نام"><input id="ph" placeholder="موبایل"><button class="go" id="enter">ادامه</button></section>`}
-    function account(){ return `<section class="note"><h2>${user.name}</h2><p>${user.phone}</p><button class="go" id="out">خروج</button></section>`}
-    document.querySelectorAll("header [data-go]").forEach((b)=>b.onclick=()=>go(b.dataset.go));
+    function home(){return `<div class="filters"><button>All flowers</button><button>Roses</button><button>Under AED 200</button><button>Luxury</button></div><h1>Fresh flowers, arranged today</h1><div class="grid">${products.map(card).join("")}</div>`}
+    function shop(){return home()}
+    function cartView(){if(!cart.length)return `<div class="sheet"><h2>Cart is empty</h2><button class="buy" data-go="shop">Browse flowers</button></div>`; const total=cart.reduce((s,i)=>s+find(i.id).now*i.qty,0); return `<div class="sheet"><h2>Cart</h2>${cart.map((i,idx)=>`<div class="row"><div>${find(i.id).name}<br>${i.size} × ${i.qty}</div><div>${aed(find(i.id).now*i.qty)}<br><button data-del="${idx}">Remove</button></div></div>`).join("")}<p class="price">${aed(total)}</p><button class="buy" data-go="checkout">Checkout</button></div>`}
+    function checkout(){if(!user)return `<div class="sheet"><h2>Login to order</h2><button class="buy" data-go="login">Login</button></div>`; return `<div class="sheet"><h2>Demo checkout</h2><input value="4242 4242 4242 4242"><p>No real payment is taken.</p><button class="buy" id="pay">Place order</button></div>`}
+    function ordersView(){if(!orders.length)return `<div class="sheet"><h2>No orders to track</h2></div>`; return `<div class="sheet"><h2>Your orders</h2>${orders.map(o=>`<div class="row"><span>${o.items.join(", ")}</span><b>${aed(o.total)}</b></div>`).join("")}</div>`}
+    function login(){return `<div class="sheet"><h2>Login</h2><input id="nm" placeholder="Name"><button class="buy" id="enter">Continue</button></div>`}
+    function account(){return `<div class="sheet"><h2>${user.name}</h2><button class="buy" id="out">Log out</button></div>`}
+    document.querySelectorAll("header [data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
     draw();
   </script>
 </body>
